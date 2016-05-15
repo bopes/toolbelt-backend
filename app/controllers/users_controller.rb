@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    p params
     if user = User.find_by(email: params[:email])
       render json: {message: "User already exist", user_id: user.id}
     else
