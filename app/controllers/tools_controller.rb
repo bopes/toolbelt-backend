@@ -34,9 +34,9 @@ class ToolsController < ApplicationController
 
     def full_address(user)
       if user.street_address_2 != nil
-        "#{user.street_address_1}, #{user.street_address_2}, #{user.city}, #{user.state}, #{user.zip}"
+        "#{user.street_address_1}, #{user.street_address_2}, #{user.city}, #{user.state}"
       else
-        "#{user.street_address_1}, #{user.city}, #{user.state}, #{user.zip}"
+        "#{user.street_address_1}, #{user.city}, #{user.state}"
       end
     end
 
