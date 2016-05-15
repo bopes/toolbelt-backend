@@ -423,3 +423,44 @@ Processing by ToolsController#index as HTML
   [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 9]]
   [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 9]]
 Completed 200 OK in 2167ms (Views: 7.8ms | ActiveRecord: 15.1ms)
+  [1m[36mActiveRecord::SchemaMigration Load (22.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mSQL (1409.4ms)[0m  DELETE FROM "users"
+  [1m[36mSQL (28.2ms)[0m  [1mDELETE FROM "tools"[0m
+  [1m[35m (0.7ms)[0m  BEGIN
+  [1m[36mUser Exists (1.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'clcblee@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (11.0ms)[0m  INSERT INTO "users" ("first_name", "last_name", "email", "street_address_1", "city", "state", "rating", "latitude", "longitude", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"  [["first_name", "Charlie"], ["last_name", "Lee"], ["email", "clcblee@gmail.com"], ["street_address_1", "740 Berkeley Ave"], ["city", "Charlotte"], ["state", "NC"], ["rating", 4], ["latitude", 35.210191], ["longitude", -80.848816], ["created_at", "2016-05-15 21:56:39.709476"], ["updated_at", "2016-05-15 21:56:39.709476"]]
+  [1m[36m (1.6ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'p@p.com' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "users" ("first_name", "last_name", "email", "street_address_1", "city", "state", "rating", "latitude", "longitude", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"  [["first_name", "Phil"], ["last_name", "Barnett"], ["email", "p@p.com"], ["street_address_1", "633 Folsom St"], ["city", "San Francisco"], ["state", "CA"], ["rating", 4], ["latitude", 37.7845165], ["longitude", -122.3971939], ["created_at", "2016-05-15 21:56:39.993870"], ["updated_at", "2016-05-15 21:56:39.993870"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'pp@pp.com' LIMIT 1[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "users" ("first_name", "last_name", "email", "street_address_1", "city", "state", "rating", "latitude", "longitude", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"  [["first_name", "Philip"], ["last_name", "B"], ["email", "pp@pp.com"], ["street_address_1", "425 Market St"], ["city", "San Francisco"], ["state", "CA"], ["rating", 4], ["latitude", 37.79119230000001], ["longitude", -122.3981466], ["created_at", "2016-05-15 21:56:40.277883"], ["updated_at", "2016-05-15 21:56:40.277883"]]
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "tools" ("user_id", "title", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 10], ["title", "drill"], ["created_at", "2016-05-15 21:56:40.341800"], ["updated_at", "2016-05-15 21:56:40.341800"]]
+  [1m[35m (15.4ms)[0m  COMMIT
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "tools" ("user_id", "title", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["user_id", 10], ["title", "saw"], ["created_at", "2016-05-15 21:56:40.361395"], ["updated_at", "2016-05-15 21:56:40.361395"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "tools" ("user_id", "title", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 11], ["title", "drill"], ["created_at", "2016-05-15 21:56:40.364973"], ["updated_at", "2016-05-15 21:56:40.364973"]]
+  [1m[35m (0.6ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "tools" ("user_id", "title", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["user_id", 11], ["title", "saw"], ["created_at", "2016-05-15 21:56:40.367969"], ["updated_at", "2016-05-15 21:56:40.367969"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "tools" ("user_id", "title", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 11], ["title", "sander"], ["created_at", "2016-05-15 21:56:40.370904"], ["updated_at", "2016-05-15 21:56:40.370904"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "tools" ("user_id", "title", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["user_id", 12], ["title", "drill"], ["created_at", "2016-05-15 21:56:40.373884"], ["updated_at", "2016-05-15 21:56:40.373884"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO "tools" ("user_id", "title", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 12], ["title", "saw"], ["created_at", "2016-05-15 21:56:40.376820"], ["updated_at", "2016-05-15 21:56:40.376820"]]
+  [1m[35m (0.8ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "tools" ("user_id", "title", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["user_id", 12], ["title", "sander"], ["created_at", "2016-05-15 21:56:40.383030"], ["updated_at", "2016-05-15 21:56:40.383030"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+  [1m[36mUser Load (1.0ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35m (2.0ms)[0m  SELECT COUNT(*) FROM "users"

@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-  has_secure_password
 
   has_many :ratings_received, class_name: "Rating", foreign_key: "ratee_id"
   has_many :ratings_given, class_name: "Rating", foreign_key: "rater_id"
