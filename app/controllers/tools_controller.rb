@@ -5,7 +5,7 @@ class ToolsController < ApplicationController
     tools = user.tools
     render json: tools
 
-    render json: {latitude: 34.0522, longitude: -118.2437}
+    # render json: {latitude: 34.0522, longitude: -118.2437}
     # current_location = Geokit::Geocoders::GoogleGeocoder.geocode "37.784517, -122.397194"
     # tools = convert_to_json(Tool.all, current_location)
     # render json: tools
