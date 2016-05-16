@@ -18,8 +18,8 @@ class UsersController < ApplicationController
   end
 
   def update
-    user = User.find_by(email: params[:email])
-    if User.update(street_address_1: params[:street_address_1], street_address_2: params[:street_address_2], city: params[:city], state: params[:state])
+    user = User.find(params[:id])
+    if user.update(street_address_1: params[:street_address_1], street_address_2: params[:street_address_2], city: params[:city], state: params[:state])
       render json: {message: "User successfully updated"}
     else
       render json: {message: "User not updated"}
