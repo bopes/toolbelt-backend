@@ -53,6 +53,7 @@ class ToolsController < ApplicationController
   end
 
   def check_tool_by_keyword(user, keyword)
+    keyword.downcase!
     user.tools.select {|tool| tool.title.include?(keyword) }
   end
 
