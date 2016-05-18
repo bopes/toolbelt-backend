@@ -59,7 +59,7 @@ class ToolsController < ApplicationController
 
   def convert_to_json(array_of_tools, current_location)
     array_of_tools.map do |tool|
-      { tool: tool, owner: tool.user, distance:get_geo(tool.user).distance_to(current_location)  }
+      { tool: tool, owner: tool.user, distance: get_geo(tool.user).distance_to(current_location).round(1)  }
     end
   end
 
