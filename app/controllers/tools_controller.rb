@@ -4,11 +4,6 @@ class ToolsController < ApplicationController
     user = User.find(params[:user_id])
     tools = user.tools
     render json: tools
-
-    # render json: {latitude: 34.0522, longitude: -118.2437}
-    # current_location = Geokit::Geocoders::GoogleGeocoder.geocode "37.784517, -122.397194"
-    # tools = convert_to_json(Tool.all, current_location)
-    # render json: tools
   end
 
   def create
@@ -21,16 +16,46 @@ class ToolsController < ApplicationController
   end
 
   def search
-    current_location = current_location(params)
-    possible_tools = []
-    close_owners = find_close_owners(current_location, User.all, 20)
-    close_owners.each {|user| possible_tools += check_tool_by_keyword(user, params[:keyword]) }
-    search_results = convert_to_json(possible_tools, current_location)
-    render json: search_results
+    current_location = find_current_location(params)
+    possible_tools = find_tools_matching_keyword(params[:keyword])
+    possible_tools_hash = find_tool_distances(possible_tools, current_location)
+    close_tools = possible_tools_hash.select{ |tool, distance| distance < 20}
+    json_tools = convert_to_json(close_tools)
+    render json: json_tools
   end
 
-  def current_location(params)
-    Geokit::Geocoders::GoogleGeocoder.geocode "#{params[:latitude]}, #{params[:longitude]}"
+
+
+
+  def find_tool_distances(tools_array, current_location)
+    Hash[ tools_array.collect{ |tool| [tool, find_distance(tool, current_location)] }]
+  end
+
+  def find_distance(tool, current_location)
+    get_geo(tool.user).distance_to(current_location).round(1)
+  end
+
+  def convert_to_json(tools_hash)
+    tools_hash.map do |tool, distance|
+      { tool: tool, owner: tool.user, distance: distance}
+    end
+  end
+
+  def find_tools_matching_keyword(search_term)
+    search_term.downcase!
+    tools = Tool.all
+    tools_title_match, tools_no_title_match = [], []
+    tools.each do |tool|
+      tool.title.downcase.include?(search_term) ? tools_title_match << tool : tools_no_title_match << tool
+    end
+    tools_with_desc = tools_no_title_match.select{ |tool| tool.description }
+    tools_desc_match = tools_with_desc.select{ |tool| tool.description.downcase.include?(search_term) }
+    search_results = tools_title_match + tools_desc_match
+    search_results
+  end
+
+  def find_current_location(params)
+    Geokit::Geocoders::MultiGeocoder.geocode "#{params[:latitude]}, #{params[:longitude]}"
   end
 
   def full_address(user)
@@ -44,23 +69,4 @@ class ToolsController < ApplicationController
   def get_geo(user)
     Geokit::Geocoders::MultiGeocoder.geocode full_address(user)
   end
-
-  def find_close_owners(current_location, owner_array, miles)
-    owner_array.select do |owner|
-      owner_location = get_geo(owner)
-      owner_location.distance_to(current_location) < miles
-    end
-  end
-
-  def check_tool_by_keyword(user, keyword)
-    keyword.downcase!
-    user.tools.select {|tool| tool.title.downcase.include?(keyword)}
-  end
-
-  def convert_to_json(array_of_tools, current_location)
-    array_of_tools.map do |tool|
-      { tool: tool, owner: tool.user, distance: get_geo(tool.user).distance_to(current_location).round(1)  }
-    end
-  end
-
 end
