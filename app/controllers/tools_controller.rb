@@ -53,7 +53,8 @@ class ToolsController < ApplicationController
   end
 
   def check_tool_by_keyword(user, keyword)
-    user.tools.select {|tool| tool.title.include?(keyword) }
+    keyword.downcase!
+    user.tools.select {|tool| tool.title.downcase.include?(keyword)}
   end
 
   def convert_to_json(array_of_tools, current_location)
