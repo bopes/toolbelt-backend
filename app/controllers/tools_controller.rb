@@ -42,7 +42,7 @@ class ToolsController < ApplicationController
   end
 
   def get_geo(user)
-    Geokit::Geocoders::GoogleGeocoder.geocode full_address(user)
+    Geokit::Geocoders::MultiGeocoder.geocode full_address(user)
   end
 
   def find_close_owners(current_location, owner_array, miles)
