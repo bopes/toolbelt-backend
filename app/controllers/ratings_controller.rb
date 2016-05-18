@@ -5,7 +5,7 @@ class RatingsController < ApplicationController
     sum = user.ratings_received.inject(0) {|total, rating| total += rating.score}
     number_of_ratings = user.ratings_received.count
     new_rating = sum / number_of_ratings
-    user.update(rating: new_rating)
+    user.update(rating: new_rating.round(1))
     render json: rating
   end
 end
