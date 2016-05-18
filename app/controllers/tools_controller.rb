@@ -18,6 +18,7 @@ class ToolsController < ApplicationController
   def search
     current_location = find_current_location(params)
     possible_tools = find_tools_matching_keyword(params[:keyword])
+    reject_own_tools(possible_tools, params[:user])
     possible_tools_hash = find_tool_distances(possible_tools, current_location)
     close_tools = possible_tools_hash.select{ |tool, distance| distance < 20}
     json_tools = convert_to_json(close_tools)
@@ -25,7 +26,9 @@ class ToolsController < ApplicationController
   end
 
 
-
+  def reject_own_tools(tool_array, user_id)
+    tool_array.reject!{ |tool| tool.user.id == user_id }
+  end
 
   def find_tool_distances(tools_array, current_location)
     Hash[ tools_array.collect{ |tool| [tool, find_distance(tool, current_location)] }]
