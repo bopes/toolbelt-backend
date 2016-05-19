@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     if user = User.find_by(email: params[:email])
       render json: {message: "User already exist", user_id: user.id}
     else
-      user = User.new(email: params[:email], first_name: params[:first_name], last_name: params[:last_name], image: params[:image])
+      user = User.new(email: params[:email], first_name: params[:first_name], last_name: params[:last_name], image: params[:image], rating: 0)
       user.save
       if user
         render json: {message: "User created successfully", user_id: user.id }
