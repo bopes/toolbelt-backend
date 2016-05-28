@@ -783,3 +783,14 @@ Completed 200 OK in 1022ms (Views: 2.8ms | ActiveRecord: 5.6ms)
   [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 10]]
   [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 11]]
   [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 12]]
+
+
+Started GET "/tools/search?keyword=drill&latitude=37.784517&longitude=-122.397194" for ::1 at 2016-05-18 15:58:41 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (16.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ToolsController#search as HTML
+  Parameters: {"keyword"=>"drill", "latitude"=>"37.784517", "longitude"=>"-122.397194"}
+  [1m[35mTool Load (29.7ms)[0m  SELECT "tools".* FROM "tools"
+  [1m[36mUser Load (1.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 10]]
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 11]]
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 12]]
+Completed 200 OK in 1610ms (Views: 2.6ms | ActiveRecord: 47.0ms)
