@@ -6,4 +6,4 @@ Application is deployed to [Heroku](https://afternoon-bayou-17340.herokuapp.com)
 
 ### Database Schema
 
-[Schema](app/assets/images/db_schema.md)
+![Schema](app/assets/images/db_schema.png)
